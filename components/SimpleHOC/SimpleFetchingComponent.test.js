@@ -31,8 +31,11 @@ test("should pass props into component via HOC", () => {
   // Call HOC Component & Wrap it with List
   // Shallow rendering with props
   // Compare & expect props 
+ 
+  const ListWrapFetch = withData()(List)
+  const wrapper = shallow(<ListWrapFetch {...{username}}/>)
 
-  expect(false).toBe(true)
+  expect(wrapper.prop('username')).toBe(username)
 });
 
 test("should call url for fetching data", () => {
@@ -42,7 +45,11 @@ test("should call url for fetching data", () => {
   // Wrap list into components
   // Expect getJSON func should be call with url
 
-  expect(false).toBe(true)
+  const url = 'https://api.github.com/users/test/gists'
+  const ListWrapFetch = withData(url)(List)
+  const wrapper = shallow(<ListWrapFetch/>)
+
+  expect(getJSON).toHaveBeenCalledWith(url)
 });
 
 test("should call url with specific path by props", () => {
@@ -57,8 +64,11 @@ test("should call url with specific path by props", () => {
   // TODO 
   // Expect url should be call with props
   // Expect getJson function should be call with url (which has username)
-  
-  expect(false).toBe(true)
+  const ListWrapFetch = withData(url)(List)
+  const wrapper = shallow(<ListWrapFetch {...props}/>)
+
+  expect(url).toHaveBeenCalledWith(props)
+  expect(getJSON).toHaveBeenCalledWith(url(props))
 });
 
 test("should pass data to the component", () => {
@@ -70,7 +80,7 @@ test("should pass data to the component", () => {
   }
   // Should mount component List with gist
   // Expect props user exist into the component 
-
-  // Example 
-  expect(false).toBe(true)
+  const ListWrapFetch = withData()(List)
+  const wrapper = mount(<ListWrapFetch {...{user}}/>)
+  expect(wrapper.prop('user')).toBe(user)
 });
