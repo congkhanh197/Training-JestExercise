@@ -18,8 +18,8 @@ test("Button Snapshot", () => {
   };
 
   // TODO : Test snapshot of button with props provided
-
-  expect(false).toBe(true)
+  const wrapper = TestRenderer.create(<Button {...props}/>).toJSON()
+  expect(wrapper).toMatchSnapshot()
 });
 
 test("Test button handler action", () => {
@@ -28,9 +28,9 @@ test("Test button handler action", () => {
     onClick: jest.fn()
   };
   // TODO: Test simulate event when click into button
-
-
-  expect(false).toBe(true)
+  const wrapper = shallow(<Button {...props}/>)
+  wrapper.find('button').simulate('click')
+  expect(props.onClick).toHaveBeenCalled()
 });
 
 test("State should have message", () => {
@@ -43,7 +43,6 @@ test("State should have message", () => {
   // Assert state to know that message of state 
   // are equal message of expect
   const messageExpect = "Test Life Cycle Of Component";
-
-
-  expect(false).toBe(true)
+  const wrapper = shallow(<Button {...props}/>)
+  expect(wrapper.state('message')).toBe(messageExpect)
 });
