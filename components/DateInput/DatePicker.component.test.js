@@ -13,8 +13,7 @@ global.mount = mount;
 
 describe("DatePicker Test ", () => {
   it("Should render snapshot for date picker", () => {
-    // RENDER SNAPSHOT FOR DATE PICKER
-
-    expect(false).toBe(true)
+    const wrapper = TestRenderer.create(<DatePicker/>).toJSON()
+    expect(wrapper).toMatchSnapshot()
   });
 });
